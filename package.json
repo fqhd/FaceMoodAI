@@ -1,0 +1,29 @@
+{
+  "name": "facemoodai",
+  "version": "1.0.0",
+  "description": "A project to determine the mood of a person and save that data to a database",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fqhd/FaceMoodAI.git"
+  },
+  "keywords": [
+    "ai",
+    "deeplearning",
+    "faceapijs"
+  ],
+  "author": "Fahd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fqhd/FaceMoodAI/issues"
+  },
+  "homepage": "https://github.com/fqhd/FaceMoodAI#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "nedb": "^1.8.0"
+  },
+  "type": "module"
+}
