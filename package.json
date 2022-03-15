@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/fqhd/FaceMoodAI#readme",
   "dependencies": {
+    "base64-img": "^1.0.4",
     "express": "^4.17.3",
     "nedb": "^1.8.0"
   },

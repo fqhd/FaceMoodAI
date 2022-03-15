@@ -2,8 +2,6 @@ const video = document.getElementById('ourVideo');
 const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d');
 
-document.body.appendChild(canvas);
-
 function setupVideo(){
     navigator.mediaDevices.getUserMedia({video: true, audio: false})
     .then(function(stream){
