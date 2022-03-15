@@ -21,6 +21,19 @@ function findExpression(expressions){
 }
 
 const htmlExpression = document.getElementById('expression');
+document.getElementById('submit').onclick = async () => {
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'text/plain',
+        },
+        body: 'whats up'
+    };
+
+    const fetchResponse = await fetch('/sendData', options);
+    const response = await fetchResponse.json();
+    console.log(response);
+}
 
 async function initFaceAPI(){
     await faceapi.loadSsdMobilenetv1Model('/models');
