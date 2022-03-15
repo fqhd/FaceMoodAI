@@ -1,11 +1,17 @@
 const video = document.getElementById('ourVideo');
+const canvas = document.createElement('canvas');
+const ctx = canvas.getContext('2d');
+
+document.body.appendChild(canvas);
 
 function setupVideo(){
-    navigator.getUserMedia(
-        {video: {}},
-        stream => video.srcObject = stream,
-        err => console.error(err)
-    );
+    navigator.mediaDevices.getUserMedia({video: true, audio: false})
+    .then(function(stream){
+        video.srcObject = stream;
+    })
+    .catch(function(error){
+        console.error(error);
+    });
 }
 
 function findExpression(expressions){
@@ -22,12 +28,19 @@ function findExpression(expressions){
 
 const htmlExpression = document.getElementById('expression');
 document.getElementById('submit').onclick = async () => {
+    canvas.width = video.offsetWidth;
+    canvas.height = video.offsetHeight;
+    ctx.drawImage(video, 0, 0, video.offsetWidth, video.offsetHeight);
+    const img64 = canvas.toDataURL();
+
+    const data = { img64, keyword: htmlExpression.textContent };
+
     const options = {
         method: 'POST',
         headers: {
-            'Content-Type': 'text/plain',
+            'Content-Type': 'application/json',
         },
-        body: 'whats up'
+        body: JSON.stringify(data)
     };
 
     const fetchResponse = await fetch('/sendData', options);

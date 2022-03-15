@@ -1,13 +1,20 @@
 import express from 'express';
+import fs from 'fs';
+import https from 'https';
+const privateKey = fs.readFileSync('sslcert/server.key', 'utf8');
+const certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
+const credentials = {key: privateKey, cert: certificate};
 const app = express();
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
-});
-app.use(express.static('public'));
-app.use(express.text({limit: '1mb'}));
 
+app.use(express.static('client'));
+app.use(express.json({limit: '1mb'}));
 app.post('/sendData', (request, response) => {
     console.log(request.body);
-    response.json('NICE!');
+    response.json({status:'successful'});
 });
+
+const httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(PORT);
+
